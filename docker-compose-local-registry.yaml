@@ -1,0 +1,42 @@
+version: '2.10.2'
+services:
+  mongodb-service:
+    image: mongo
+    volumes:
+      - mongodbdata:/data/db
+    container_name: mongodb-service
+    ports:
+      - 27017:27017
+    networks:
+      - examNetwork
+
+  backend:
+    image: 127.0.0.1:5001/backend-image
+    container_name: backend
+    ports:
+      - 5000:5000
+    networks:
+      - examNetwork
+    depends_on:
+      - mongodb-service
+
+  frontend:
+    image: 127.0.0.1:5001/frontend-image
+    container_name: frontend
+    ports:
+      - 80:80
+    networks:
+      - examNetwork
+    depends_on:
+      - backend
+    # allows to run the application with 
+    #-it flag which is required with react
+    stdin_open: true
+    tty: true
+
+volumes:
+  mongodbdata:
+
+networks:
+  examNetwork:
+    external: true

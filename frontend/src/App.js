@@ -14,6 +14,7 @@ import Login from "./containers/Login";
 import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./containers/Dashboard";
 import Jobs from "./containers/Jobs";
+import HealthCheck from "./HealthCheck";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -44,6 +45,8 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/healthCheck" component={HealthCheck} />
+
 
                         <Switch>
                             <PrivateRoute exact path="/dashboard" component={Dashboard} />

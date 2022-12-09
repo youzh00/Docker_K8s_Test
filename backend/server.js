@@ -24,9 +24,14 @@ app.use('/api/', (req, res, next) => {
     next();
 });
 
+// health check for kubernetes 
+app.get('/healthCheck', (req, res) => {
+    res.status(200).send();
+});
+
 mongoose
     .connect(
-        `mongodb://127.0.0.1:27017/exam`, {
+        `mongodb://mongodb-service/exam`, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
