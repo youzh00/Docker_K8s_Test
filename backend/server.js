@@ -24,10 +24,7 @@ app.use('/api/', (req, res, next) => {
     next();
 });
 
-// health check for kubernetes 
-app.get('/healthCheck', (req, res) => {
-    res.status(200).send();
-});
+
 
 mongoose
     .connect(
@@ -117,10 +114,14 @@ require("./utils/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/jobs", jobs);
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('server up and running.');
 });
 
+// health check for kubernetes 
+app.get('/api/healthCheck', (req, res) => {
+    res.status(200).send("The app is healthy");
+});
 const port = process.env.PORT || 5000;
 
 server.listen(port, () =>  console.log(`Server v8 up and running on port ${port} !`));

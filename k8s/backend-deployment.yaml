@@ -22,7 +22,7 @@ spec:
               containerPort: 5000
           livenessProbe:
             httpGet:
-              path: /healthCheck
+              path: /api/healthCheck
               port: backend-port
             timeoutSeconds: 15
             periodSeconds: 120
@@ -30,7 +30,7 @@ spec:
           readinessProbe:
             httpGet:
               port: backend-port
-              path: /healthCheck
+              path: /api/healthCheck
             timeoutSeconds: 15
             periodSeconds: 13
     
